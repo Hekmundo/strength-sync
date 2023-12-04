@@ -1,7 +1,6 @@
 <script lang="ts">
   import { SignedIn, SignedOut } from 'sveltefire';
   import { signInWithGoogle } from '$lib/firebase';
-  import logo from '$lib/assets/yin-yang.png';
   import DayCarousel from '$lib/components/DayCarousel.svelte';
   import Header from '$lib/components/Header.svelte';
 </script>

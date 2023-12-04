@@ -12,7 +12,7 @@
 </script>
 
 <FirebaseApp {auth} {firestore} {storage}>
-  <AppShell slotPageContent=" py-4 mx-auto" slotFooter="flex justify-center px-4 py-5">
+  <AppShell slotPageContent=" py-4 mx-auto" slotFooter="flex justify-center px-4 pb-3 pt-2">
     <slot />
     <Footer slot="footer" />
   </AppShell>
