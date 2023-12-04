@@ -1,12 +1,12 @@
 import type { FirebaseOptions } from 'firebase/app';
 import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
 import {
   getAuth,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
-  onAuthStateChanged,
   type User
 } from 'firebase/auth';
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
@@ -26,12 +26,13 @@ const firebaseConfig: FirebaseOptions = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
+export const firestore = getFirestore(app);
+export const storage = getStorage(app);
 const googleProvider = new GoogleAuthProvider();
-const firestore = getFirestore(app);
 
 // Functions
-const signUpWithEmail = async (email: string, password: string) => {
+export const signUpWithEmail = async (email: string, password: string) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     return userCredential.user;
@@ -40,7 +41,7 @@ const signUpWithEmail = async (email: string, password: string) => {
   }
 };
 
-const signInWithEmail = async (email: string, password: string) => {
+export const signInWithEmail = async (email: string, password: string) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
@@ -49,7 +50,7 @@ const signInWithEmail = async (email: string, password: string) => {
   }
 };
 
-const signInWithGoogle = async () => {
+export const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
     return result.user;
@@ -58,7 +59,7 @@ const signInWithGoogle = async () => {
   }
 };
 
-const createUserRecord = async (user: User) => {
+export const createUserRecord = async (user: User) => {
   try {
     const userRef = doc(firestore, 'users', user.uid);
     await setDoc(userRef, {
@@ -72,18 +73,10 @@ const createUserRecord = async (user: User) => {
   }
 };
 
-const checkUserInFirestore = async (user: User) => {
+export const checkUserInFirestore = async (user: User) => {
   const userRef = doc(firestore, 'users', user.uid);
   const docSnap = await getDoc(userRef);
 
   // User does not exist in Firestore, create a new record
   if (!docSnap.exists()) createUserRecord(user);
 };
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    checkUserInFirestore(user);
-  }
-});
-
-export { auth, googleProvider, firestore, signUpWithEmail, signInWithEmail, signInWithGoogle };
