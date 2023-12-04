@@ -1,12 +1,11 @@
 <script lang="ts">
   import { SignedIn } from 'sveltefire';
-  import { signOut } from 'firebase/auth';
 </script>
 
 <div class="text-center text-xs">
-  <SignedIn let:auth>
+  <SignedIn let:signOut>
     <div class="mb-2">
-      <a href={null} on:click={() => signOut(auth)} class="anchor cursor-pointer text-sm">
+      <a href={null} on:click={signOut} class="anchor cursor-pointer text-sm no-underline">
         Sign Out
       </a>
     </div>

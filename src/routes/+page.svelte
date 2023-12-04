@@ -1,19 +1,25 @@
 <script lang="ts">
   import { SignedIn, SignedOut } from 'sveltefire';
   import { signInWithGoogle } from '$lib/firebase';
+  import logo from '$lib/assets/yin-yang.png';
+  import DayCarousel from '$lib/components/DayCarousel.svelte';
+  import Header from '$lib/components/Header.svelte';
 </script>
 
-<div class="container h-full mx-auto flex justify-center items-center">
-  <div class="mw-50 mx-4">
-    <SignedIn let:user let:signOut>
-      <div class="flex items-center flex-col">
-        <p>Hello {user.displayName}</p>
-      </div>
-    </SignedIn>
+<SignedIn>
+  <Header />
+  <DayCarousel />
 
-    <SignedOut let:auth>
-      <button class="btn variant-ghost-primary" on:click={signInWithGoogle}>Sign In</button>
-    </SignedOut>
-    <!-- <input type="number" max="999" {value} class="input" /> -->
+  <div class="flex justify-center space-x-3 mt-3">
+    <div class="bg-primary-500 rounded-full w-3 h-3"></div>
+    <div class="bg-surface-700 rounded-full w-3 h-3"></div>
+    <div class="bg-surface-700 rounded-full w-3 h-3"></div>
+    <div class="bg-surface-700 rounded-full w-3 h-3"></div>
   </div>
-</div>
+</SignedIn>
+
+<SignedOut>
+  <div class="h-full mx-auto flex justify-center items-center mw-50">
+    <button class="btn variant-ghost-primary" on:click={signInWithGoogle}>Sign In</button>
+  </div>
+</SignedOut>
