@@ -2,6 +2,8 @@
   import logo from '$lib/assets/yin-yang.png';
 </script>
 
+<div class="h-[1vh]" />
+
 <header class="px-4 h-[15vh] flex justify-center flex-col">
   <div class="flex flex-wrap gap-3">
     <img
@@ -16,3 +18,5 @@
     nisl id aliquam ultrices, nunc nunc lacinia nunc, id lacinia nunc nunc nec nunc.
   </p>
 </header>
+
+<div class="h-[1vh]" />

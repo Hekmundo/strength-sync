@@ -20,33 +20,36 @@
     }
   ];
 
-  let elemCarousel: HTMLDivElement;
-  // function carouselLeft(): void {
-  //   const x =
-  //     elemCarousel.scrollLeft === 0
-  //       ? elemCarousel.clientWidth * elemCarousel.childElementCount // loop
-  //       : elemCarousel.scrollLeft - elemCarousel.clientWidth; // step left
-  //   elemCarousel.scroll(x, 0);
-  // }
+  let currentDayIndex = 0;
 
-  // function carouselRight(): void {
-  //   const x =
-  //     elemCarousel.scrollLeft === elemCarousel.scrollWidth - elemCarousel.clientWidth
-  //       ? 0 // loop
-  //       : elemCarousel.scrollLeft + elemCarousel.clientWidth; // step right
-  //   elemCarousel.scroll(x, 0);
-  // }
+  async function handleScroll(event: UIEvent) {
+    const target = event.target as HTMLElement;
+    currentDayIndex = Math.round(target.scrollLeft / target.offsetWidth);
+  }
 </script>
 
 <div class="flex justify-center">
   <div class="grid grid-cols-[1fr] gap-4 items-center w-screen">
     <div
-      bind:this={elemCarousel}
       class="snap-x snap-mandatory scroll-smooth flex overflow-x-auto hide-scrollbar"
+      on:scroll={handleScroll}
     >
       {#each days as day}
-        <DaySummary day={day.day} dayDescription={day.dayDescription} />
+        <div>
+          <DaySummary day={day.day} dayDescription={day.dayDescription} />
+        </div>
       {/each}
     </div>
   </div>
+</div>
+
+<div class="h-[7vh] flex flex-col justify-center">
+  <div class="flex justify-center space-x-3">
+    {#each days as day, i}
+      <div
+        class="rounded-full w-3 h-3 {currentDayIndex === i ? 'bg-primary-500' : 'bg-surface-700'}"
+      ></div>
+    {/each}
+  </div>
+  <div class="h-[1vh]" />
 </div>

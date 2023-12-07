@@ -6,20 +6,8 @@
 </script>
 
 <SignedIn>
-  <div class="h-[1vh]" />
   <Header />
-  <div class="h-[1vh]" />
   <DayCarousel />
-
-  <div class="h-[7vh] flex flex-col justify-center">
-    <div class="flex justify-center space-x-3">
-      <div class="bg-primary-500 rounded-full w-3 h-3"></div>
-      <div class="bg-surface-700 rounded-full w-3 h-3"></div>
-      <div class="bg-surface-700 rounded-full w-3 h-3"></div>
-      <div class="bg-surface-700 rounded-full w-3 h-3"></div>
-    </div>
-    <div class="h-[1vh]" />
-  </div>
 </SignedIn>
 
 <SignedOut>
