@@ -10,5 +10,5 @@
       </a>
     </div>
   </SignedIn>
-  <p class="text-surface-600">© Copyright StrengthSync 2023. All rights reserved.</p>
+  <!-- <p class="text-surface-600">© Copyright StrengthSync 2023. All rights reserved.</p> -->
 </div>
